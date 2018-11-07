@@ -57,7 +57,7 @@ int main(int argc, char* argv[]){
 
 	for (int x = 0; x < n; ++x)
 	{
-	scanf("%s",&query[x]);
+	scanf("%s",query[x]);
 		
 	clock_gettime(CLOCK_REALTIME, &start);
 	fseek(file, 0, SEEK_SET);

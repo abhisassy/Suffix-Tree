@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-
+#include <ctype.h>
 char choice ; // choice == 'n' -> not case sensitive   
               // choice == 'y' -> case sensitive    
               //{set to n by default,change value in main.c}     
@@ -81,6 +81,8 @@ void     SEA(SUFFIX_TREE*   tree, POS* pos,PATH str,DBL_WORD* rule_applied,char 
 void     SPA(SUFFIX_TREE* tree,POS* pos,DBL_WORD phase,DBL_WORD* extension,char* repeated_extension);
 
 void     ST_DeleteSubTree(NODE* node);
+
+char *strlwr(char *str);
 //
 
 

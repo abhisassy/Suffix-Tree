@@ -1,5 +1,17 @@
 #include "suffix_tree.h"
 
+// in linux strlwr not defined 
+char *strlwr(char *str)
+{
+  unsigned char *p = (unsigned char *)str;
+
+  while (*p) {
+     *p = tolower((unsigned char)*p);
+      p++;
+  }
+
+  return str;
+}
 
 NODE* create_node(NODE* father, DBL_WORD start, DBL_WORD end, DBL_WORD position){
      
