@@ -279,32 +279,32 @@ NODE* trace_string(
    return node;
 }
 
-DBL_WORD findleaves(NODE* node, int x){
-	DBL_WORD count =0;
+DBL_WORD findleaves(NODE* node, int index[], DBL_WORD count){
 	if(node== NULL)
 		return 0;
 	if(node->sons==0){
-		printf("%d:%ld, ",x,node->path_position );
-		return 1;
+    //printf("%ld\n",node->path_position-1 );
+		index[count++]=node->path_position-1;
+		return count;
 	}
 	else{
 		node=node->sons;
 		while(node!=0){
-			count += findleaves(node,x);
+			count = findleaves(node,index,count);
 			node = node->right_sibling;
 		}
 		return count;
 	}
 }
 
-void ST_FindSubstring(
+DBL_WORD ST_FindSubstring(
                       /* The suffix array */
                       SUFFIX_TREE*    tree,      
                       /* The substring to find */
                       char*  W,         
                       /* The length of W */
                       DBL_WORD        P,
-                      int x)         
+                      int index[])         
 {
 	//printf("%ld\n",index );
    /* Starts with the root's son that has the first character of W as its
@@ -337,10 +337,11 @@ void ST_FindSubstring(
          //sleep(1);
          //printf("Finding Substrings  ...\n");
          //sleep(1);//return;
-         DBL_WORD ans = findleaves(node,x);
+         DBL_WORD ans = findleaves(node,index,0);
+         //printf("%ld\n",ans );
          //printf("\n");
          //printf("Total Occurences of %s : %ld\n",W,ans );
-         return;
+         return ans;
          /* W was found - it is a substring. Return its path starting index */
       	 //ST_FindSubstring(tree,W,P,(node->path_position)+index);
          //return node->path_position;
@@ -350,10 +351,10 @@ void ST_FindSubstring(
       else
       {
          /* One non-matching symbols is found - W is not a substring */
-         return;
+         return -1;
       }
    }
-   return;
+   return -1;
 }
 
 void follow_suffix_link(SUFFIX_TREE* tree, POS* pos){

@@ -57,7 +57,7 @@ typedef struct SUFFIXTREEPOS
 
 SUFFIX_TREE* ST_CreateTree(const char*   str, DBL_WORD length);
 
-void         ST_FindSubstring(SUFFIX_TREE* tree, char* W, DBL_WORD P,int doc_no);
+DBL_WORD     ST_FindSubstring(SUFFIX_TREE* tree, char* W, DBL_WORD P,int index[]);
 
 void         ST_DeleteTree(SUFFIX_TREE* tree);
 
@@ -74,7 +74,7 @@ NODE*    apply_extension_rule_2(NODE* node, DBL_WORD edge_label_begin, DBL_WORD 
 NODE*    trace_single_edge(SUFFIX_TREE*    tree,NODE* node,PATH str,DBL_WORD* edge_pos,DBL_WORD* chars_found, SKIP_TYPE type, int* search_done);
 NODE*    trace_string(SUFFIX_TREE* tree,NODE* node,PATH str,DBL_WORD* edge_pos,DBL_WORD* chars_found,SKIP_TYPE type);   
 
-DBL_WORD findleaves(NODE* node, int x);
+DBL_WORD findleaves(NODE* node, int index[],DBL_WORD count );
 void     follow_suffix_link(SUFFIX_TREE* tree, POS* pos);
 void     create_suffix_link(NODE* node, NODE* link);
 void     SEA(SUFFIX_TREE*   tree, POS* pos,PATH str,DBL_WORD* rule_applied,char after_rule_3);

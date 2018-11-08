@@ -19,26 +19,6 @@ Input :
 	Remaining n Lines 	:  query words 
 
 Output :
-	<document_number>:<index within doc> , ... , <execution_time>
-	<''''''''''-------- repeated for n queries -------- ''''''''>
+	<index> , ... , <execution_time>
 
 Algorithm Implemented to create suffix tree: Ukkonnens's Suffix tree algo
-
-
-
-Psedo Code : 
-	
-for every query word:	
-	doc_no -> 1
-	while(not end of file):
-		take character by character input from file
-		if character != @ :
-			append to str
-		else:
-			create_suffix_tree(str) 
-			check_for_query_word(query)
-			doc_no++
-			empty(str) 			
-
-
-
