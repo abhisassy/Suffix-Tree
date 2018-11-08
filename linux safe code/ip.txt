@@ -1,0 +1,7 @@
+data.txt
+5
+death
+lion
+alan
+the
+yoga
