@@ -1,7 +1,7 @@
 data.txt
 5
-death
-lion
-alan
 the
-yoga
+lion
+dave
+death
+munro

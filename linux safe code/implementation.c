@@ -552,32 +552,28 @@ SUFFIX_TREE* ST_CreateTree(const char* str, DBL_WORD length)
    if(str == 0)
       return 0;
 
-   /* Allocating the tree */
    tree = malloc(sizeof(SUFFIX_TREE));
-   if(tree == 0)
-   {
+   if(tree == 0){
       printf("\nOut of memory.\n");
       exit(0);
    }
 
    /* Calculating string length (with an ending $ sign) */
    tree->length = length+1;
-   //ST_ERROR     = length+10;
    
-   /* Allocating the only real string of the tree */
+   
    tree->tree_string = malloc((tree->length+1)*sizeof(char));
-   if(tree->tree_string == 0)
-   {
+   if(tree->tree_string == 0){
       printf("\nOut of memory.\n");
       exit(0);
    }
-   //heap+=(tree->length+1)*sizeof(char);
+   
 
    memcpy(tree->tree_string+sizeof(char),str,length*sizeof(char));
    /* $ is considered a uniqe symbol */
    tree->tree_string[tree->length] = '$';
    
-   /* Allocating the tree root node */
+   
    tree->root            = create_node(0, 0, 0, 0);
    tree->root->suffix_link = 0;
 
@@ -592,8 +588,8 @@ SUFFIX_TREE* ST_CreateTree(const char* str, DBL_WORD length)
    pos.edge_pos     = 0;
 
    /* Ukkonen's algorithm begins here */
-   for(; phase < tree->length; phase++)
-   {
+   for(; phase < tree->length; phase++){
+      
       /* Perform Single Phase Algorithm */
       SPA(tree, &pos, phase, &extension, &repeated_extension);
    }
@@ -603,16 +599,15 @@ SUFFIX_TREE* ST_CreateTree(const char* str, DBL_WORD length)
 
 void ST_DeleteSubTree(NODE* node)
 {
-   /* Recoursion stoping condition */
    if(node == 0)
       return;
-   /* Recoursive call for right sibling */
+   
    if(node->right_sibling!=0)
       ST_DeleteSubTree(node->right_sibling);
-   /* Recoursive call for first son */
+   
    if(node->sons!=0)
       ST_DeleteSubTree(node->sons);
-   /* Delete node itself, after its whole tree was deleted as well */
+   
    free(node);
 }
 

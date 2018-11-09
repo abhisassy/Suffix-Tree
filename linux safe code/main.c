@@ -54,75 +54,52 @@ int main(int argc, char* argv[]){
 	//printf("Enter no of query strings: \n");
 	int n;
 	scanf("%d",&n);
-	char query[n][50];
+
+	char query[len];
 
 	int index[len];
-
-	for (int x = 0; x < n; ++x)
-	{
-		scanf("%s",query[x]);
-	}
 
 	if(choice=='n'){
 				
 		strcpy(str,strlwr(str));
-		//printf("Constructing tree.....");
-		tree = ST_CreateTree(str,strlen(str));
-		//printf("Done.\n");
-		
-		for (int i = 0; i < n; ++i)
-		{
-			clock_gettime(CLOCK_REALTIME, &start);
-
-			count = ST_FindSubstring(tree, (unsigned char*)strlwr(query[i]), strlen(query[i]),index);
-			int c =count;
-			if(c>0)
-				qsort(index,c,sizeof(int),cmpfunc);
-			
-			for (int i = 0; i < c; ++i)
-			{
-			if(index[i] != -1)
-				printf("%d, ",index[i]);
-			}
-
-			clock_gettime(CLOCK_REALTIME, &end);
-			time = time_elapsed(&start, &end);
-			printf("%f",time );
-			printf("\n");
-
-			//memset(index,0,c);
-			c=0;
-		}
-
 	}
-	else{
 
-		//printf("Constructing tree.....");
-		tree = ST_CreateTree(str,strlen(str));
-		//printf("Done.\n");
-		for (int i = 0; i < n; ++i)
-		{
-			clock_gettime(CLOCK_REALTIME, &start);
-				
-			count = ST_FindSubstring(tree, (unsigned char*)(query[i]), strlen(query[i]),index);
-			int c= count;
-			if(c>0)
-				qsort(index,c,sizeof(int),cmpfunc);
+	clock_gettime(CLOCK_REALTIME, &start);
+	tree = ST_CreateTree(str,strlen(str));
+	clock_gettime(CLOCK_REALTIME, &end);
+	
+	time = time_elapsed(&start, &end);
+	printf("%lf\n",time );
+	
+	for (int x = 0; x < n; ++x)
+	{
+		scanf("%s",&query);
+	
+		if(choice=='n'){
+		strcpy(query,strlwr(query));
+		}	
+	
+		clock_gettime(CLOCK_REALTIME, &start);
 
-			for (int i = 0; i < c; ++i)
-			{
-			if(index[i] != -1)
-				printf("%d, ",index[i]);
+		count = ST_FindSubstring(tree, (unsigned char*)query, strlen(query),index);
+		int c =count;
+		if(c>0){
+			qsort(index,c,sizeof(int),cmpfunc);
+			for (int i = 0; i < c; ++i)	{
+
+				if(index[i] != -1)
+					printf("%d, ",index[i]);
+				}
 			}
-			clock_gettime(CLOCK_REALTIME, &end);
-			time = time_elapsed(&start, &end);
-			printf("%f",time );
-			printf("\n");
+		else{
+			printf("-1, ");
+			}
+		clock_gettime(CLOCK_REALTIME, &end);
+		time = time_elapsed(&start, &end);
+		printf("%lf\n",time );
+		c=0;
+	}
 
-			//memset(index,0,c);
-			c=0;	
-		}
-	}	
 	
 	ST_DeleteTree(tree);	
 	fclose(file);
